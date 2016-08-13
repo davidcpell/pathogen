@@ -1,0 +1,7 @@
+name 'pathogen'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures pathogen'
+long_description 'Installs/Configures pathogen'
+version '0.1.0'
