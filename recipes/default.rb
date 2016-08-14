@@ -8,27 +8,37 @@ user    = node['user']
 home    = File.join('/', 'home', user)
 vim_dir = File.join(home, '.vim')
 vimrc   = File.join(home, '.vimrc')
+permissions = '0744'
 
-package 'git'
+directory vim_dir do 
+  user  user
+  group 'root'
+  mode  permissions
+end
 
 directory File.join(vim_dir, 'autoload') do
-  recursive true
-  action    :create
+  user      user
+  group     'root'
+  mode      permissions
 end
 
 directory File.join(vim_dir, 'bundle') do
-  recursive true
-  action    :create
+  user  user
+  group 'root'
+  mode  permissions
 end
 
-file vimrc
+file vimrc do
+  user  user
+  group 'root'
+  mode  permissions
+end
 
-bash 'download pathogen' do 
-  pathogen = File.join(vim_dir, 'autoload', 'pathogen.vim')
-
-  code "wget -O #{pathogen} https://tpo.pe/pathogen.vim"
-
-  not_if { File.exist?(pathogen) }
+remote_file File.join(vim_dir, 'autoload', 'pathogen.vim') do 
+  source 'https://tpo.pe/pathogen.vim' 
+  user   user
+  group  'root'
+  mode   permissions 
 end
 
 bash 'initialize pathogen in .vimrc' do

@@ -17,4 +17,6 @@ suites:
   - name: default
     run_list:
       - recipe[pathogen::default]
+      - recipe[pathogen::git]
+      - recipe[pathogen::_plugins]
     attributes:
