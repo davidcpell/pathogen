@@ -10,7 +10,7 @@ vim_dir = File.join(home, '.vim')
 vimrc   = File.join(home, '.vimrc')
 permissions = '0744'
 
-directory vim_dir do 
+directory vim_dir do
   user  user
   group 'root'
   mode  permissions
@@ -34,17 +34,17 @@ file vimrc do
   mode  permissions
 end
 
-remote_file File.join(vim_dir, 'autoload', 'pathogen.vim') do 
-  source 'https://tpo.pe/pathogen.vim' 
+remote_file File.join(vim_dir, 'autoload', 'pathogen.vim') do
+  source 'https://tpo.pe/pathogen.vim'
   user   user
   group  'root'
-  mode   permissions 
+  mode   permissions
 end
 
 bash 'initialize pathogen in .vimrc' do
   code "echo 'execute pathogen#infect()' >> #{vimrc}"
 
-  not_if do 
+  not_if do
     contents = File.read(vimrc)
     contents.match(/execute pathogen#infect\(\)/)
   end
