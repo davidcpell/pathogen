@@ -16,7 +16,8 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[pathogen::default]
+      - recipe[pathogen::vim]
       - recipe[pathogen::git]
+      - recipe[pathogen::default]
       - recipe[pathogen::_plugins]
     attributes:
