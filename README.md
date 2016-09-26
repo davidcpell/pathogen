@@ -6,7 +6,6 @@ Use this cookbook to install the Pathogen vim plugin manager.
 
 This cookbook has been tested with the following platforms:
 
-- Ubuntu 16.04
 - Ubuntu 14.04
 - Centos 7.2
 
@@ -15,8 +14,8 @@ This cookbook has been tested with the following platforms:
 The focus of this cookbook is on installing Pathogen and plugins, so it doesn't provide sophisticated recipes for `git` and `vim` itself, for which excellent and detailed cookbooks are already available. With that said, you *can* include barebones package-based recipes from within this cookbook if you don't need anything special:
 
 ```ruby
-include_recipe 'pathogen[vim]'
 include_recipe 'pathogen[git]'
+include_recipe 'pathogen[vim]'
 ```
 
 ### Attributes
@@ -25,11 +24,11 @@ include_recipe 'pathogen[git]'
 
 ### Resources
 
-- `pathogen_plugin` - This resource wraps `git` and can be used to install plugins to your user's `$HOME/.vim/bundle` directory. To use it, pass the name of the plugin as the `name` attribute and the GitHub user/organization as the `org` attribute:
+- `pathogen_plugin` - This resource wraps `git` and can be used to install plugins to `node['pathogen']['install_path']/bundle`. To use it, pass the name of the plugin as the `name` attribute and the GitHub user/organization as the `github_org` attribute:
 
     ```ruby
     pathogen_plugin 'ctrlp.vim' do
-      org 'ctrlpvim'
+      github_org 'ctrlpvim'
     end
     ```
 
