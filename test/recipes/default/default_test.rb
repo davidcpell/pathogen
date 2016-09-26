@@ -1,4 +1,4 @@
-home     = File.join('/', 'home', 'vagrant')
+home     = File.join('/', 'root')
 vim_path = File.join(home, '.vim')
 
 describe directory(File.join(vim_path, 'autoload')) do

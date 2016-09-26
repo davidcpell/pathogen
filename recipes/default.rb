@@ -4,48 +4,35 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-user    = node['user']
-home    = File.join('/', 'home', user)
-vim_dir = File.join(home, '.vim')
-vimrc   = File.join(home, '.vimrc')
-permissions = '0744'
+install_path = node['pathogen']['install_path']
+vimrc_path   = node['pathogen']['vimrc_path']
 
-directory vim_dir do
-  user  user
-  group 'root'
-  mode  permissions
+directory install_path do
+  mode '0777'
 end
 
-directory File.join(vim_dir, 'autoload') do
-  user      user
-  group     'root'
-  mode      permissions
+directory File.join(install_path, 'autoload') do
+  mode '0777'
 end
 
-directory File.join(vim_dir, 'bundle') do
-  user  user
-  group 'root'
-  mode  permissions
+directory File.join(install_path, 'bundle') do
+  mode '0777'
 end
 
-file vimrc do
-  user  user
-  group 'root'
-  mode  permissions
-end
-
-remote_file File.join(vim_dir, 'autoload', 'pathogen.vim') do
+remote_file File.join(install_path, 'autoload', 'pathogen.vim') do
   source 'https://tpo.pe/pathogen.vim'
-  user   user
-  group  'root'
-  mode   permissions
+  mode   '0755'
+end
+
+file vimrc_path do 
+  action :create_if_missing
 end
 
 bash 'initialize pathogen in .vimrc' do
-  code "echo 'execute pathogen#infect()' >> #{vimrc}"
+  code "echo 'execute pathogen#infect()' >> #{vimrc_path}"
 
   not_if do
-    contents = File.read(vimrc)
+    contents = File.read(vimrc_path)
     contents.match(/execute pathogen#infect\(\)/)
   end
 end
