@@ -20,7 +20,8 @@ include_recipe 'pathogen[vim]'
 
 ### Attributes
 
-- `node['user']` - Specify the name of the user who will own the Pathogen installation. The necessary directory structure will be created in this user's `$HOME`. 
+- `node['pathogen']['install_path']` - Specify the directory where pathogen should be installed. Defaults to `'/root/.vim`.
+- `node['pathogen']['vimrc_path']` - Specify the location of your user's `.vimrc` file. Defaults to `'/root/.vimrc'`.
 
 ### Resources
 
@@ -34,7 +35,7 @@ include_recipe 'pathogen[vim]'
 
 ### Usage
 
-To install Pathogen, add `recipe[pathogen]` to your run list or include the default recipe in recipe that is in your run list.
+To install Pathogen, add `recipe[pathogen]` to your run list or include the default recipe in recipe that is in your run list. If you aren't using some other source to install `git` and `vim`, add those recipes before the default pathogen recipe.
 
 To install plugins, use the above-mentioned `pathogen_plugin` LWRP in a recipe that is in your run list.
 
