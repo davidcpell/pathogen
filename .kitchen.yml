@@ -16,6 +16,10 @@ suites:
   - name: default
     run_list:
       - recipe[pathogen::vim]
+      - recipe[pathogen::git]
       - recipe[pathogen::default]
-      - recipe[pathogen::_plugins]
+      - recipe[pathogen_test::plugins]
     attributes:
+      pathogen: 
+        plugins: 
+          ctrlpvim: ctrlp.vim
