@@ -29,6 +29,7 @@ end
 Installs plugins that can be found on GitHub. The "name property" of the resource is the name of the plugin. 
 
 **Properties**
+- `github_org` - The name of the GitHub organization or user that houses the repo.
 - `users` - A list of users for whom `pathogen` should be installed. Required.
 
 **Example**
@@ -43,7 +44,7 @@ end
 
 1. Add `depends 'pathogen'` to your `metadata.rb`.
 
-2. Go buck-wild with the above two resources in your recipe of choice.
+2. Go buck wild with the above two resources in your recipe of choice.
 
 ## Contributing
 
