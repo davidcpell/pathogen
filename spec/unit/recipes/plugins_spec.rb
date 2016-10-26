@@ -9,11 +9,11 @@ require 'spec_helper'
 describe 'pathogen::plugins' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new do |node|
-      node.normal['pathogen']['plugins'] = {'org' => 'plug'}
+      node.normal['pathogen']['plugins'] = { 'org' => 'plug' }
     end.converge(described_recipe)
   end
 
-  before do 
+  before do
     allow(::File).to receive(:read).and_call_original
     allow(::File).to receive(:read).with('/root/.vimrc').and_return('')
   end

@@ -4,7 +4,7 @@ end
 
 package %w(vim git)
 
-pathogen_base 'install pathogen' do 
+pathogen_base 'install pathogen' do
   users ['vagrant']
 end
 

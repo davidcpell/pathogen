@@ -2,7 +2,9 @@ resource_name :pathogen_base
 
 property :users, Array, required: true
 
-action :install do 
+default_action :install
+
+action :install do
   users.each do |user|
     home = Dir.home(user)
     vimrc = ::File.join(home, '.vimrc')
@@ -22,7 +24,7 @@ action :install do
       owner  user
     end
 
-    file vimrc do 
+    file vimrc do
       action :create_if_missing
     end
 

@@ -1,10 +1,10 @@
 resource_name :pathogen_plugin
 
-default_action :install
-
 property :name, String, required: true, name_property: true
-property :github_org,  String, required: true
+property :github_org, String, required: true
 property :users, Array, required: true
+
+default_action :install
 
 action :install do
   users.each do |user|
