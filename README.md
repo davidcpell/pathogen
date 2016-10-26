@@ -1,43 +1,49 @@
 # pathogen Cookbook
 
-Use this cookbook to install the Pathogen vim plugin manager.
-
-### Platforms
-
-This cookbook has been tested with the following platforms:
-
-- Ubuntu 14.04
-- Centos 7.2
+Use the custom resources provided by this cookbook to install [pathogen](https://github.com/tpope/vim-pathogen), a plugin manager for vim, as well as any plugins that you specify.
 
 ### Prerequisites
 
-The focus of this cookbook is on installing Pathogen and plugins, so it doesn't provide sophisticated recipes for `git` and `vim` itself, for which excellent and detailed cookbooks are already available. With that said, you *can* include barebones package-based recipes from within this cookbook if you don't need anything special:
-
-```ruby
-include_recipe 'pathogen[git]'
-include_recipe 'pathogen[vim]'
-```
+This cookbook expects `vim` and `git` to be available but does *not* provide resources or recipes for installing them.
 
 ### Attributes
 
-- `node['pathogen']['install_path']` - Specify the directory where pathogen should be installed. Defaults to `'/root/.vim`.
-- `node['pathogen']['vimrc_path']` - Specify the location of your user's `.vimrc` file. Defaults to `'/root/.vimrc'`.
+N/A
 
 ### Resources
 
-- `pathogen_plugin` - This resource wraps `git` and can be used to install plugins to `node['pathogen']['install_path']/bundle`. To use it, pass the name of the plugin as the `name` attribute and the GitHub user/organization as the `github_org` attribute:
+#### pathogen_base
+The `pathogen_base` resource manages the basic installation of `pathogen`.
 
-    ```ruby
-    pathogen_plugin 'ctrlp.vim' do
-      github_org 'ctrlpvim'
-    end
-    ```
+**Properties**
+- `users` - A list of users for whom `pathogen` should be installed. Required.
+
+**Example**
+```ruby
+pathogen_base 'install pathogen!' do 
+  users ['root', 'vagrant']
+end
+```
+
+#### pathogen_plugin
+Installs plugins that can be found on GitHub. The "name property" of the resource is the name of the plugin. 
+
+**Properties**
+- `users` - A list of users for whom `pathogen` should be installed. Required.
+
+**Example**
+```ruby
+pathogen_plugin 'ctrlp.vim' do
+  github_org 'ctrlpvim'
+  users ['root', 'vagrant']
+end
+```
 
 ### Usage
 
-To install Pathogen, add `recipe[pathogen]` to your run list or include the default recipe in recipe that is in your run list. If you aren't using some other source to install `git` and `vim`, add those recipes before the default pathogen recipe.
+1. Add `depends 'pathogen'` to your `metadata.rb`.
 
-To install plugins, use the above-mentioned `pathogen_plugin` LWRP in a recipe that is in your run list.
+2. Go buck-wild with the above two resources in your recipe of choice.
 
 ## Contributing
 
