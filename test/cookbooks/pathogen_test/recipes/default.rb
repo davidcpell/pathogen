@@ -1,4 +1,4 @@
-if node.platform == 'ubuntu' && node.platform_version == '16.04'
+if node['platform'] == 'ubuntu' && node['platform_version'] == '16.04'
   execute 'apt-get update'
 end
 
