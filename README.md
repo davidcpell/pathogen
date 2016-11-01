@@ -15,10 +15,10 @@ N/A
 #### pathogen_base
 The `pathogen_base` resource manages the basic installation of `pathogen`.
 
-**Properties**
+##### Properties
 - `users` - A list of users for whom `pathogen` should be installed. Required.
 
-**Example**
+##### Example
 ```ruby
 pathogen_base 'install pathogen!' do 
   users ['root', 'vagrant']
@@ -28,11 +28,11 @@ end
 #### pathogen_plugin
 Installs plugins that can be found on GitHub. The "name property" of the resource is the name of the plugin. 
 
-**Properties**
+##### Properties
 - `github_org` - The name of the GitHub organization or user that houses the repo.
 - `users` - A list of users for whom `pathogen` should be installed. Required.
 
-**Example**
+##### Example
 ```ruby
 pathogen_plugin 'ctrlp.vim' do
   github_org 'ctrlpvim'
